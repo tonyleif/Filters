@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using Filters.Infrastructure;
 
 namespace Filters.Controllers
@@ -13,9 +14,23 @@ namespace Filters.Controllers
         }
 
         [GoogleAuth]
+        [Authorize(Users = "bob@google.com")]
         public string List()
         {
             return "This is the List action on the Home controller";
+        }
+
+        [RangeException]
+        public string RangeTest(int id)
+        {
+            if(id > 100)
+            {
+                return String.Format("The id value is: {0}", id);
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException("id", id, "");
+            }
         }
     }
 }
