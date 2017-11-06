@@ -13,6 +13,7 @@ namespace Filters.Controllers
             return "This is the Customer controller";
         }
 
+        [CustomOverrideActionFilters]
         [SimpleMessage(Message = "B")]
         public string OtherAction()
         {
